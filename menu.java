@@ -71,7 +71,7 @@ public class menu extends JFrame implements ActionListener{
             if(selected_option == 0) {
                 this.dispose();
                 //Login frame_login = new Login();
-                loginDemo2.login_frame.setVisible(true);
+                loginDemo.login_frame.setVisible(true);
 
                 JOptionPane.showMessageDialog(null, "Logged Out Successfully!");
                 //JOptionPane.showConfirmDialog(null, "Logged Out Successfully!", "Confirmation",JOptionPane.DEFAULT_OPTION);
