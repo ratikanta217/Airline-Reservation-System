@@ -1,11 +1,9 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Dimension;
 
 class Form_demo{
@@ -26,19 +24,19 @@ class Form_demo{
 public class Form extends JFrame implements ActionListener, ItemListener{
 	private JLabel title,name, label_passenger_count, classes,preferences;
 	private JTextField passenger_name, tf_passenger_count;
-	private JButton find;
+	private JButton btn_find, btn_back;
 	private Choice select_preference,select_classes;
+
 	Form() {
 		getContentPane().setLayout(null);
 		setTitle("Registration Form");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(500,400);
 		
 		//adding features: Rinku
 		setResizable(false);
 		setLocationRelativeTo(null);
 
-		setVisible(true);
 		//contentPane = new JPanel();
 		
 		title = new JLabel("REGISTRATION   FORM ");
@@ -69,8 +67,11 @@ public class Form extends JFrame implements ActionListener, ItemListener{
 		passenger_name = new JTextField();
 		tf_passenger_count = new JTextField();
 
-		find = new JButton("Find");
-		find.setFont(new Font("Arial", Font.PLAIN, 12));
+		btn_find = new JButton("FIND");
+		btn_find.setFont(new Font("Arial", Font.BOLD, 12));
+
+		btn_back = new JButton("BACK");
+		btn_find.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		select_classes = new Choice();
 		select_classes.add("Not Selected");
@@ -105,8 +106,11 @@ public class Form extends JFrame implements ActionListener, ItemListener{
 		select_classes.setBounds(215, 200, 150, 30);
 		select_preference.setBounds(215,250,150,30);
 		
-		find.setBounds(150, 300, 190, 30);
-		find.addActionListener(this);
+		btn_find.setBounds(250, 300, 110, 30);
+		btn_find.addActionListener(this);
+		btn_back.setBounds(130, 300, 110, 30);
+		btn_back.addActionListener(this);
+
 
 		getContentPane().add(title);
 		getContentPane().add(name);
@@ -117,9 +121,10 @@ public class Form extends JFrame implements ActionListener, ItemListener{
 		getContentPane().add(tf_passenger_count);
 		getContentPane().add(select_classes);
 		getContentPane().add(select_preference);
-		getContentPane().add(find);
+		getContentPane().add(btn_find);
+		getContentPane().add(btn_back);
 		getContentPane().setBackground(Color.BLACK);
-		getRootPane().setDefaultButton(find);
+		getRootPane().setDefaultButton(btn_find);
 	}
 
 	public void itemStateChanged(ItemEvent e){
@@ -141,13 +146,29 @@ public class Form extends JFrame implements ActionListener, ItemListener{
 
 	}
 	public void actionPerformed(ActionEvent ae){
+		if(ae.getSource() == btn_find) {
+			int passenger_count = Integer.parseInt(tf_passenger_count.getText());
+			String selected_class = select_classes.getItem(select_classes.getSelectedIndex());
+			String selected_preference = select_preference.getItem(select_preference.getSelectedIndex());
+			Seating find_seats = new Seating(selected_class, selected_preference, passenger_count);
+			int result = Seating.find_seats();
+			System.out.println("\nResult from the seat search : "+result);
+			switch(result){
+				case 0: ImageIcon icon = new ImageIcon("C:\\Users\\monan\\Documents\\Semester 5\\JAVA\\OEP\\GUI\\jbuttonIcon.png");
+						JOptionPane.showMessageDialog(null, "Seats have been Booked!");
+				break;
 
-		int passenger_count = Integer.parseInt(tf_passenger_count.getText());
-   		String selected_class = select_classes.getItem(select_classes.getSelectedIndex());
-		String selected_preference = select_preference.getItem(select_preference.getSelectedIndex());
-		Seating find_seats = new Seating(selected_class, selected_preference, passenger_count);
-		//find_seats.setVisible(true);
-		//this.dispose();
+				case 1: JOptionPane.showMessageDialog(null, "Seats cannot be booked!", "Sorry!",JOptionPane.ERROR_MESSAGE);
+				break;
+
+				default: JOptionPane.showMessageDialog(null, "Server failure\nTry again later.", "Error",JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		else{
+			this.dispose();
+			menu frame_menu = new menu();
+			frame_menu.setVisible(true);
+		}
 	  }
 	  
 
