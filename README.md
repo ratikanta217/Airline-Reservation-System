@@ -1,4 +1,4 @@
-### Airline-Reservation-System - **Open Ended Problem**
+### Airline-Reservation-System - **Open Ended Project**
 
 A simple GUI project made in the process of leaning JAVA Swing.
 
