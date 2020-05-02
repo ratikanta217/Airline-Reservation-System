@@ -13,3 +13,5 @@ A simple GUI project made in the process of leaning JAVA Swing.
     3. Logout
   
 **No database connectivity yet. Seating chart persists untill application is closed.**
+
+**Download the *.jar* file to see the app in running**
