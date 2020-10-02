@@ -14,13 +14,13 @@ A simple GUI project made in the process of leaning JAVA Swing.
   
 ### Let us _gif_ through the app
 
-* Enter credentials to login into the app
+* Enter credentials to login into the app  
 ![](readme-gifs/ars1.gif)
 
-* Enter passenger details and confirm availability of seats
+* Enter passenger details and confirm availability of seats  
 ![](readme-gifs/ars2.gif)
 
-* Logout when done
+* Logout when done  
 ![](readme-gifs/ars3.gif)
 
 **No database connectivity yet. Seating chart persists untill application is closed.**
